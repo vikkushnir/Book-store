@@ -14,6 +14,7 @@ public class StoreApplication {
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
+            System.out.println("App run");
         };
     }
 }
