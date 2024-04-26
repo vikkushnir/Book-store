@@ -2,7 +2,7 @@ package online.book.store.mapper;
 
 import online.book.store.config.MapperConfig;
 import online.book.store.dto.BookDto;
-import online.book.store.dto.CreateBookRequestDto;
+import online.book.store.dto.BookRequestDto;
 import online.book.store.model.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,5 +13,5 @@ public interface BookMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "deleted", ignore = true)
-    Book toModel(CreateBookRequestDto requestDto);
+    Book toModel(BookRequestDto requestDto);
 }
