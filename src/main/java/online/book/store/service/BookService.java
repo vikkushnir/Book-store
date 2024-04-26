@@ -2,12 +2,16 @@ package online.book.store.service;
 
 import java.util.List;
 import online.book.store.dto.BookDto;
-import online.book.store.dto.CreateBookRequestDto;
+import online.book.store.dto.BookRequestDto;
 
 public interface BookService {
-    BookDto save(CreateBookRequestDto requestDto);
+    BookDto save(BookRequestDto requestDto);
 
     List<BookDto> findAll();
 
     BookDto findById(Long id);
+
+    BookDto updateById(Long id, BookRequestDto requestDto);
+
+    void deleteById(Long id);
 }
