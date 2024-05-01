@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -28,14 +29,16 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             HttpStatusCode status,
             WebRequest request
     ) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put(TIMESTAMP, LocalDateTime.now());
-        body.put(STATUS, HttpStatus.BAD_REQUEST);
         List<String> errors = ex.getBindingResult().getAllErrors().stream()
                 .map(this::getErrorMessage)
                 .toList();
-        body.put(ERRORS, errors);
-        return new ResponseEntity<>(body, headers, status);
+        return handleException(HttpStatus.BAD_REQUEST, errors);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFound(
+            EntityNotFoundException ex) {
+        return handleException(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
     private String getErrorMessage(ObjectError error) {
@@ -45,5 +48,14 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             return fieldName + " " + errorMessage;
         }
         return error.getDefaultMessage();
+    }
+
+    private ResponseEntity<Object> handleException(HttpStatus status, Object errors) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put(TIMESTAMP, LocalDateTime.now());
+        body.put(STATUS, HttpStatus.BAD_REQUEST);
+        body.put(ERRORS, errors);
+        return new ResponseEntity<>(body, status);
+
     }
 }
