@@ -8,8 +8,8 @@ import online.book.store.validation.FieldMatch;
 
 @Getter
 @Setter
-@FieldMatch(first = "password",
-        second = "repeatPassword",
+@FieldMatch(field = "password",
+        fieldMatch = "repeatPassword",
         message = "The password fields must match")
 public class UserRegistrationRequestDto {
     @NotBlank(message = "field can't be empty")
