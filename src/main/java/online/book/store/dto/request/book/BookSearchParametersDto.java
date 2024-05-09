@@ -1,4 +1,4 @@
-package online.book.store.dto;
+package online.book.store.dto.request.book;
 
 public record BookSearchParametersDto(
         String title,

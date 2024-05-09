@@ -1,14 +1,14 @@
-package online.book.store.service;
+package online.book.store.service.book;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import online.book.store.dto.BookDto;
-import online.book.store.dto.BookRequestDto;
-import online.book.store.dto.BookSearchParametersDto;
+import online.book.store.dto.request.book.BookRequestDto;
+import online.book.store.dto.request.book.BookSearchParametersDto;
+import online.book.store.dto.response.book.BookResponseDto;
 import online.book.store.exception.EntityNotFoundException;
 import online.book.store.mapper.BookMapper;
 import online.book.store.model.Book;
-import online.book.store.repository.BookRepository;
+import online.book.store.repository.book.BookRepository;
 import online.book.store.repository.book.spec.BookSpecificationBuilder;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -22,26 +22,26 @@ public class BookServiceImpl implements BookService {
     private final BookSpecificationBuilder bookSpecificationBuilder;
 
     @Override
-    public BookDto save(BookRequestDto requestDto) {
+    public BookResponseDto save(BookRequestDto requestDto) {
         Book book = bookMapper.toModel(requestDto);
         return bookMapper.toDto(bookRepository.save(book));
     }
 
     @Override
-    public List<BookDto> findAll(Pageable pageable) {
+    public List<BookResponseDto> findAll(Pageable pageable) {
         return bookRepository.findAll(pageable).stream()
                 .map(bookMapper::toDto)
                 .toList();
     }
 
     @Override
-    public BookDto findById(Long id) {
+    public BookResponseDto findById(Long id) {
         return bookMapper.toDto(bookRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("Can't find book by id: " + id)));
     }
 
     @Override
-    public BookDto updateById(Long id, BookRequestDto requestDto) {
+    public BookResponseDto updateById(Long id, BookRequestDto requestDto) {
         if (!bookRepository.existsById(id)) {
             throw new EntityNotFoundException("Can't find book with id: " + id);
         }
@@ -56,8 +56,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> search(BookSearchParametersDto searchParametersDto,
-                                Pageable pageable
+    public List<BookResponseDto> search(BookSearchParametersDto searchParametersDto,
+                                        Pageable pageable
     ) {
         Specification<Book> bookSpecification =
                 bookSpecificationBuilder.build(searchParametersDto);

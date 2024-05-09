@@ -1,6 +1,6 @@
 package online.book.store.repository.book.provider;
 
-import online.book.store.dto.BookSearchParametersDto;
+import online.book.store.dto.request.book.BookSearchParametersDto;
 import online.book.store.model.Book;
 import online.book.store.repository.specification.SpecificationProvider;
 import org.springframework.data.jpa.domain.Specification;

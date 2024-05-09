@@ -41,6 +41,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return handleException(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
+    @ExceptionHandler(RegistrationException.class)
+    protected ResponseEntity<Object> handleRegistrationException(RuntimeException ex) {
+        return handleException(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
     private String getErrorMessage(ObjectError error) {
         if (error instanceof FieldError fieldError) {
             String fieldName = fieldError.getField();
