@@ -12,16 +12,16 @@ import online.book.store.validation.FieldMatch;
         fieldMatch = "repeatPassword",
         message = "The password fields must match")
 public class UserRegistrationRequestDto {
-    @NotBlank(message = "field can't be empty")
+    @NotBlank
     private String email;
-    @NotBlank(message = "field can't be empty")
-    @Size(min = 8, message = "field should contain at least 8 character")
+    @NotBlank
+    @Size(min = 8)
     private String password;
-    @NotBlank(message = "please repeat your password!")
+    @NotBlank
     private String repeatPassword;
-    @NotBlank(message = "field can't be empty")
+    @NotBlank
     private String firstName;
-    @NotBlank(message = "field can't be empty")
+    @NotBlank
     private String lastName;
     private String shippingAddress;
 }
