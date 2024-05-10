@@ -30,7 +30,7 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Get all books",
             description = "Get a list of all available books")
     public List<BookResponseDto> findAll(Pageable pageable) {
@@ -38,7 +38,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Get a book by ID",
             description = "Get a book by ID")
     public BookResponseDto getBookById(@PathVariable Long id) {
@@ -46,7 +46,7 @@ public class BookController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create a new book",
             description = "Create a new book")
     public BookResponseDto saveBook(@RequestBody @Valid BookRequestDto bookDto) {
@@ -54,7 +54,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update a book by ID",
             description = "Update a book by ID")
     public BookResponseDto updateBook(@PathVariable Long id,
@@ -64,7 +64,7 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a book by ID",
             description = "Delete a book by ID")
@@ -73,7 +73,7 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Get a list of books by search parameters",
             description = "You can use: title, author, isbn, priceFrom, priceTo "
                     + "as search parameters")
