@@ -1,0 +1,104 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-books
+      author: vik
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "The Hitchhiker's Guide to the Galaxy" }
+              - column: {name: author, value: "Douglas Adams" }
+              - column: {name: isbn, value: "9780345391803" }
+              - column: {name: price, value: "8.99" }
+              - column: {name: description, value: "A comic science fiction series that follows the adventures of Arthur Dent after the Earth is demolished to make way for a hyperspace bypass." }
+              - column: {name: cover_image, value: "http://example.com/thehitchhikerguidetothegalaxy.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "Dune" }
+              - column: {name: author, value: "Frank Herbert" }
+              - column: {name: isbn, value: "9780441172719" }
+              - column: {name: price, value: "30.99" }
+              - column: {name: description, value: "A science fiction novel set in the distant future that explores themes of politics, religion, and ecology." }
+              - column: {name: cover_image, value: "http://example.com/dune.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "1984" }
+              - column: {name: author, value: "George Orwell" }
+              - column: {name: isbn, value: "9780451524935" }
+              - column: {name: price, value: "21.50" }
+              - column: {name: description, value: "A dystopian novel set in a totalitarian regime, exploring themes of surveillance, government control, and individual freedom." }
+              - column: {name: cover_image, value: "http://example.com/1984.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "The Great Gatsby" }
+              - column: {name: author, value: "F. Scott Fitzgerald" }
+              - column: {name: isbn, value: "9780743273565" }
+              - column: {name: price, value: "7.99" }
+              - column: {name: description, value: "A classic novel set in the 1920s, depicting the decadence and disillusionment of the American Dream." }
+              - column: {name: cover_image, value: "http://example.com/thegreatgatsby.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "Harry Potter and the Philosopher's Stone" }
+              - column: {name: author, value: "J.K. Rowling" }
+              - column: {name: isbn, value: "9781408855652" }
+              - column: {name: price, value: "12.99" }
+              - column: {name: description, value: "The first book in the Harry Potter series, following the adventures of a young wizard, Harry Potter, and his friends at Hogwarts School of Witchcraft and Wizardry." }
+              - column: {name: cover_image, value: "http://example.com/harrypotter1.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "The Catcher in the Rye" }
+              - column: {name: author, value: "J.D. Salinger" }
+              - column: {name: isbn, value: "9780316769488" }
+              - column: {name: price, value: "8.49" }
+              - column: {name: description, value: "A coming-of-age novel narrated by a teenager named Holden Caulfield, who reflects on his experiences in New York City." }
+              - column: {name: cover_image, value: "http://example.com/thecatcherintherye.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "The Lord of the Rings" }
+              - column: {name: author, value: "J.R.R. Tolkien" }
+              - column: {name: isbn, value: "9780544003415" }
+              - column: {name: price, value: "18.99" }
+              - column: {name: description, value: "An epic high fantasy novel set in the fictional world of Middle-earth, following the quest to destroy the One Ring and defeat the Dark Lord Sauron." }
+              - column: {name: cover_image, value: "http://example.com/thelordoftherings.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "Pride and Prejudice" }
+              - column: {name: author, value: "Jane Austen" }
+              - column: {name: isbn, value: "9780486284736" }
+              - column: {name: price, value: "40.00" }
+              - column: {name: description, value: "A romantic novel set in rural England, focusing on the experiences of Elizabeth Bennet as she navigates issues of class, marriage, and morality." }
+              - column: {name: cover_image, value: "http://example.com/prideandprejudice.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "The Hobbit" }
+              - column: {name: author, value: "J.R.R. Tolkien" }
+              - column: {name: isbn, value: "9780547928227" }
+              - column: {name: price, value: "9.99" }
+              - column: {name: description, value: "A fantasy novel that follows the journey of Bilbo Baggins, a hobbit who is swept into an epic quest to reclaim the Lonely Mountain and its treasure from the dragon Smaug." }
+              - column: {name: cover_image, value: "http://example.com/thehobbit.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "Moby-Dick" }
+              - column: {name: author, value: "Herman Melville" }
+              - column: {name: isbn, value: "9780142000083" }
+              - column: {name: price, value: "11.49" }
+              - column: {name: description, value: "A novel that tells the story of Captain Ahab's obsessive quest for revenge on the white whale Moby Dick, which had previously destroyed his ship and severed his leg at the knee." }
+              - column: {name: cover_image, value: "http://example.com/mobydick.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "The Chronicles of Narnia" }
+              - column: {name: author, value: "C.S. Lewis" }
+              - column: {name: isbn, value: "9780064471190" }
+              - column: {name: price, value: "14.99" }
+              - column: {name: description, value: "A series of seven fantasy novels set in the fictional world of Narnia, featuring various adventures of children who play central roles in the unfolding history of that world." }
+              - column: {name: cover_image, value: "http://example.com/chroniclesofnarnia.jpg" }
