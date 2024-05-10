@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-users
+      author: vik
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "sara.smith@example.com"
+              - column:
+                  name: password
+                  value: "$2a$10$LIRXPLebwgXiQHOzt6pFo./7R/8fXwegiZScvDqJrnMjixRXkEqHS"
+              - column:
+                  name: first_name
+                  value: "Sara"
+              - column:
+                  name: last_name
+                  value: "Smith"
+              - column:
+                  name: shipping_address
+                  value: "123 Main St, Anytown, USA, 12345"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "michael.smith@example.com"
+              - column:
+                  name: password
+                  value: "$2a$10$LIRXPLebwgXiQHOzt6pFo./7R/8fXwegiZScvDqJrnMjixRXkEqHS"
+              - column:
+                  name: first_name
+                  value: "Michael"
+              - column:
+                  name: last_name
+                  value: "Smith"
+              - column:
+                  name: shipping_address
+                  value: "456 Elm St, Othertown, USA, 54321"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "emily.smith@example.com"
+              - column:
+                  name: password
+                  value: "$2a$10$LIRXPLebwgXiQHOzt6pFo./7R/8fXwegiZScvDqJrnMjixRXkEqHS"
+              - column:
+                  name: first_name
+                  value: "Emily"
+              - column:
+                  name: last_name
+                  value: "Smith"
+              - column:
+                  name: shipping_address
+                  value: "789 Oak St, Anycity, USA, 67890"
