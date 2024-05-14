@@ -2,9 +2,7 @@ package online.book.store.service.user;
 
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
-import online.book.store.dto.request.user.UserLoginRequestDto;
 import online.book.store.dto.request.user.UserRegistrationRequestDto;
-import online.book.store.dto.response.user.UserLoginResponseDto;
 import online.book.store.dto.response.user.UserResponseDto;
 import online.book.store.exception.RegistrationException;
 import online.book.store.mapper.UserMapper;
@@ -12,22 +10,16 @@ import online.book.store.model.Role.RoleName;
 import online.book.store.model.User;
 import online.book.store.repository.user.RoleRepository;
 import online.book.store.repository.user.UserRepository;
-import online.book.store.security.JwtUtil;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserAuthenticationServiceImpl implements UserAuthenticationService {
+public class RegistrationServiceImpl implements RegistrationService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
-    private final JwtUtil jwtUtil;
-    private final AuthenticationManager authenticationManager;
 
     @Override
     public UserResponseDto register(UserRegistrationRequestDto requestDto) {
@@ -44,16 +36,5 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
                         new RegistrationException("Can't register user with this role")))
         );
         return userMapper.toDto(userRepository.save(user));
-    }
-
-    @Override
-    public UserLoginResponseDto authenticate(UserLoginRequestDto requestDto) {
-        final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        requestDto.email(), requestDto.password())
-        );
-
-        String token = jwtUtil.generateToken(authentication.getName());
-        return new UserLoginResponseDto(token);
     }
 }

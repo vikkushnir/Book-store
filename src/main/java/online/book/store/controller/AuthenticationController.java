@@ -9,7 +9,8 @@ import online.book.store.dto.request.user.UserRegistrationRequestDto;
 import online.book.store.dto.response.user.UserLoginResponseDto;
 import online.book.store.dto.response.user.UserResponseDto;
 import online.book.store.exception.RegistrationException;
-import online.book.store.service.user.UserAuthenticationService;
+import online.book.store.service.user.AuthenticationService;
+import online.book.store.service.user.RegistrationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @Tag(name = "User authentication", description = "Endpoint for registering new users")
 public class AuthenticationController {
-    private final UserAuthenticationService userService;
+    private final RegistrationService userService;
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/registration")
     @Operation(summary = "Register a new user",
@@ -35,6 +37,6 @@ public class AuthenticationController {
     @Operation(summary = "Login user",
             description = "Login user")
     public UserLoginResponseDto login(@RequestBody UserLoginRequestDto requestDto) {
-        return userService.authenticate(requestDto);
+        return authenticationService.authenticate(requestDto);
     }
 }
