@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-categories
+      author: vik
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "Comic Science Fiction"}
+              - column: {name: description, value: "Books that blend science fiction with humor."}
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "Science Fiction"}
+              - column: {name: description, value: "Books that explore futuristic concepts, advanced science, and technology."}
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "Dystopian Fiction"}
+              - column: {name: description, value: "Books set in a speculative future with oppressive societal control."}
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "Classic Literature"}
+              - column: {name: description, value: "Books that have been recognized as significant works of literature."}
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "Fantasy"}
+              - column: {name: description, value: "Books that include magical elements and fantastical worlds."}
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "Coming-of-Age Fiction"}
+              - column: {name: description, value: "Books focusing on the growth of a young protagonist."}
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "High Fantasy"}
+              - column: {name: description, value: "Epic fantasy novels set in a fictional universe."}
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "Romantic Fiction"}
+              - column: {name: description, value: "Books that focus on romantic relationships and themes."}

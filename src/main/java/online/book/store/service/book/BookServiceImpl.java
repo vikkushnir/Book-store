@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import online.book.store.dto.request.book.BookRequestDto;
 import online.book.store.dto.request.book.BookSearchParametersDto;
+import online.book.store.dto.response.book.BookDtoWithoutCategoryIds;
 import online.book.store.dto.response.book.BookResponseDto;
 import online.book.store.exception.EntityNotFoundException;
 import online.book.store.mapper.BookMapper;
@@ -28,14 +29,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookResponseDto> findAll(Pageable pageable) {
+    public List<BookResponseDto> getAll(Pageable pageable) {
         return bookRepository.findAll(pageable).stream()
                 .map(bookMapper::toDto)
                 .toList();
     }
 
     @Override
-    public BookResponseDto findById(Long id) {
+    public BookResponseDto getById(Long id) {
         return bookMapper.toDto(bookRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("Can't find book by id: " + id)));
     }
@@ -64,6 +65,13 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll(bookSpecification, pageable)
                 .stream()
                 .map(bookMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(Long id, Pageable pageable) {
+        return bookRepository.findBooksByCategoryId(id, pageable).stream()
+                .map(bookMapper::toDtoWithoutCategoryIds)
                 .toList();
     }
 }

@@ -34,7 +34,7 @@ public class BookController {
     @Operation(summary = "Get all books",
             description = "Get a list of all available books")
     public List<BookResponseDto> findAll(Pageable pageable) {
-        return bookService.findAll(pageable);
+        return bookService.getAll(pageable);
     }
 
     @GetMapping("/{id}")
@@ -42,7 +42,7 @@ public class BookController {
     @Operation(summary = "Get a book by ID",
             description = "Get a book by ID")
     public BookResponseDto getBookById(@PathVariable Long id) {
-        return bookService.findById(id);
+        return bookService.getById(id);
     }
 
     @PostMapping

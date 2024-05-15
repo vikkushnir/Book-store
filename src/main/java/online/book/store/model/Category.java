@@ -2,8 +2,6 @@ package online.book.store.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,32 +10,20 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
-import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "roles")
-@SQLDelete(sql = "UPDATE roles SET is_deleted = true WHERE id = ?")
+@Table(name = "categories")
+@SQLDelete(sql = "UPDATE categories SET is_deleted = true WHERE id = ?")
 @SQLRestriction(value = "is_deleted = false")
-public class Role implements GrantedAuthority {
-    private static final String ROLE = "ROLE_";
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
-    private RoleName name;
+    private String name;
+    private String description;
     @Column(nullable = false)
     private boolean isDeleted;
-
-    @Override
-    public String getAuthority() {
-        return ROLE + name.name();
-    }
-
-    public enum RoleName {
-        USER,
-        ADMIN
-    }
 }
