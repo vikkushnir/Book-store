@@ -1,5 +1,6 @@
 package online.book.store.service.book;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,15 +30,20 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookResponseDto save(BookRequestDto requestDto) {
+        Set<Long> categoryIds = requestDto.getCategoryIds();
+        List<Category> categories = categoryRepository.findAllById(categoryIds);
+
+        if (categories.size() != categoryIds.size()) {
+            Set<Long> foundCategoryIds = categories.stream()
+                    .map(Category::getId)
+                    .collect(Collectors.toSet());
+            categoryIds.removeAll(foundCategoryIds);
+            throw new EntityNotFoundException("Invalid category ID: " + categoryIds);
+        }
+
         Book book = bookMapper.toModel(requestDto);
-        Set<Category> categories = requestDto.getCategoryIds()
-                .stream()
-                .map(categoryId
-                        -> categoryRepository.findById(categoryId)
-                        .orElseThrow(() -> new EntityNotFoundException(
-                                "Invalid category ID: " + categoryId)))
-                .collect(Collectors.toSet());
-        book.setCategories(categories);
+        book.setCategories(new HashSet<>(categories));
+
         return bookMapper.toDto(bookRepository.save(book));
     }
 
