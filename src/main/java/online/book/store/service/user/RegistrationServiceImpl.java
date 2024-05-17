@@ -10,6 +10,7 @@ import online.book.store.model.Role.RoleName;
 import online.book.store.model.User;
 import online.book.store.repository.user.RoleRepository;
 import online.book.store.repository.user.UserRepository;
+import online.book.store.service.shoppingcart.ShoppingCartService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
+    private final ShoppingCartService shoppingCartService;
 
     @Override
     public UserResponseDto register(UserRegistrationRequestDto requestDto) {
@@ -35,6 +37,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .orElseThrow(() ->
                         new RegistrationException("Can't register user with this role")))
         );
+        shoppingCartService.createShoppingCart(user);
         return userMapper.toDto(userRepository.save(user));
     }
 }
