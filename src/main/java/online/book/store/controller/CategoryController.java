@@ -63,7 +63,6 @@ public class CategoryController {
     public CategoryResponseDto updateCategory(
             @PathVariable Long id, @RequestBody CategoryRequestDto requestDto) {
         return categoryService.updateById(id, requestDto);
-
     }
 
     @DeleteMapping("/{id}")
@@ -73,7 +72,6 @@ public class CategoryController {
             description = "Delete a category by ID")
     public void deleteCategory(@PathVariable Long id) {
         categoryService.deleteById(id);
-
     }
 
     @GetMapping("/{id}/books")
@@ -84,5 +82,4 @@ public class CategoryController {
                                                                 Pageable pageable) {
         return bookService.getBooksByCategoryId(id, pageable);
     }
-
 }
