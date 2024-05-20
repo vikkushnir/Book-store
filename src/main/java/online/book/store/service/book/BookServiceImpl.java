@@ -1,6 +1,9 @@
 package online.book.store.service.book;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import online.book.store.dto.request.book.BookRequestDto;
 import online.book.store.dto.request.book.BookSearchParametersDto;
@@ -9,8 +12,10 @@ import online.book.store.dto.response.book.BookResponseDto;
 import online.book.store.exception.EntityNotFoundException;
 import online.book.store.mapper.BookMapper;
 import online.book.store.model.Book;
+import online.book.store.model.Category;
 import online.book.store.repository.book.BookRepository;
 import online.book.store.repository.book.spec.BookSpecificationBuilder;
+import online.book.store.repository.category.CategoryRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -21,10 +26,24 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final BookSpecificationBuilder bookSpecificationBuilder;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public BookResponseDto save(BookRequestDto requestDto) {
+        Set<Long> categoryIds = requestDto.getCategoryIds();
+        List<Category> categories = categoryRepository.findAllById(categoryIds);
+
+        if (categories.size() != categoryIds.size()) {
+            Set<Long> foundCategoryIds = categories.stream()
+                    .map(Category::getId)
+                    .collect(Collectors.toSet());
+            categoryIds.removeAll(foundCategoryIds);
+            throw new EntityNotFoundException("Invalid category ID: " + categoryIds);
+        }
+
         Book book = bookMapper.toModel(requestDto);
+        book.setCategories(new HashSet<>(categories));
+
         return bookMapper.toDto(bookRepository.save(book));
     }
 
