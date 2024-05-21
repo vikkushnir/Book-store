@@ -87,18 +87,18 @@ public class OrderServiceImpl implements OrderService {
     private static Set<OrderItem> getOrderItems(ShoppingCart shoppingCart, Order order) {
         return shoppingCart.getCartItems()
                 .stream()
-                .map(i -> new OrderItem(
+                .map(item -> new OrderItem(
                         order,
-                        i.getBook(),
-                        i.getQuantity(),
-                        i.getBook().getPrice()))
+                        item.getBook(),
+                        item.getQuantity(),
+                        item.getBook().getPrice()))
                 .collect(Collectors.toSet());
     }
 
     private static BigDecimal getSumOfAllItems(Set<OrderItem> orderItems) {
         return orderItems.stream()
-                .map(i -> i.getPrice()
-                        .multiply(BigDecimal.valueOf(i.getQuantity())))
+                .map(item -> item.getPrice()
+                        .multiply(BigDecimal.valueOf(item.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
