@@ -55,12 +55,9 @@ public class OrderServiceImpl implements OrderService {
         order.setTotal(totalPrice);
         order.setOrderItems(orderItems);
 
-        Order savedOrder = orderRepository.save(order);
-        orderItemRepository.saveAll(orderItems);
-
         cartItemRepository.deleteAll(shoppingCart.getCartItems());
 
-        return orderMapper.toDto(savedOrder);
+        return orderMapper.toDto(orderRepository.save(order));
     }
 
     @Override
