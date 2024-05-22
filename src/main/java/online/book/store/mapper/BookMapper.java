@@ -18,6 +18,8 @@ import org.mapstruct.MappingTarget;
 public interface BookMapper {
     BookResponseDto toDto(Book book);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
     @Mapping(target = "categories", ignore = true)
     Book toModel(BookRequestDto requestDto);
 
