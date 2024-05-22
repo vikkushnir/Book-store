@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import online.book.store.dto.request.cartitem.CartItemRequestDto;
-import online.book.store.dto.request.cartitem.UpdateRequestCartItemDto;
+import online.book.store.dto.request.cartitem.UpdateCartItemRequestDto;
 import online.book.store.dto.response.shoppingcart.ShoppingCartResponseDto;
 import online.book.store.model.User;
 import online.book.store.service.shoppingcart.ShoppingCartService;
@@ -47,7 +47,7 @@ public class ShoppingCartController {
             description = "Get the shopping cart for authenticated user")
     public ShoppingCartResponseDto getShoppingCart(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
-        return shoppingCartService.getShoppingCart(user.getEmail());
+        return shoppingCartService.getShoppingCart(user.getId());
     }
 
     @PreAuthorize("hasRole('USER')")
@@ -57,7 +57,7 @@ public class ShoppingCartController {
     public ShoppingCartResponseDto updateItem(
             Authentication authentication,
             @PathVariable Long id,
-            @RequestBody @Valid UpdateRequestCartItemDto requestDto
+            @RequestBody @Valid UpdateCartItemRequestDto requestDto
     ) {
         User user = (User) authentication.getPrincipal();
         return shoppingCartService.updateItem(user.getId(), id, requestDto);
