@@ -2,7 +2,6 @@ package online.book.store.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -74,8 +73,7 @@ class BookControllerTest {
 
         mockMvc.perform(post(BOOK_URL)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(bookRequestDto))
-                        .with(csrf()))
+                        .content(objectMapper.writeValueAsString(bookRequestDto)))
                 .andExpect(status().isCreated());
     }
 
