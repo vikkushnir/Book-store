@@ -29,6 +29,7 @@ class CategoryServiceImplTest {
     private static final String CATEGORY_DESCRIPTION = "interesting book";
     private static final Long CATEGORY_ID = 1L;
     private static final int EXPECTED_CATEGORIES = 3;
+
     @Mock
     private CategoryMapper categoryMapper;
     @Mock
@@ -39,39 +40,34 @@ class CategoryServiceImplTest {
     @Test
     @DisplayName("Save a new category")
     void save_validRequestDto_success() {
-        CategoryRequestDto requestDto = new CategoryRequestDto();
-        requestDto.setName(CATEGORY_NAME);
-        requestDto.setDescription(CATEGORY_DESCRIPTION);
+        CategoryRequestDto requestDto = createCategoryRequestDto();
+        Category category = createCategory();
+        CategoryResponseDto expected = createCategoryResponseDto(requestDto);
 
-        CategoryResponseDto responseDto = new CategoryResponseDto();
-        responseDto.setId(CATEGORY_ID);
-        responseDto.setName(requestDto.getName());
-        responseDto.setDescription(requestDto.getDescription());
-
-        Category category = new Category();
         when(categoryMapper.toEntity(requestDto)).thenReturn(category);
         when(categoryRepository.save(category)).thenReturn(category);
-        when(categoryMapper.toDto(category)).thenReturn(responseDto);
+        when(categoryMapper.toDto(category)).thenReturn(expected);
 
-        CategoryResponseDto result = categoryService.save(requestDto);
-        assertEquals(responseDto, result);
-        assertNotNull(result);
+        CategoryResponseDto actual = categoryService.save(requestDto);
+
+        assertEquals(expected, actual);
+        assertNotNull(actual);
     }
 
     @Test
     @DisplayName("Find category by id")
     void findById_ValidCategoryId_ReturnValidCategoryDto() {
-        CategoryResponseDto responseDto = new CategoryResponseDto();
-        responseDto.setId(CATEGORY_ID);
-        responseDto.setName(CATEGORY_NAME);
+        Category category = createCategory();
+        CategoryResponseDto responseDto = createCategoryResponseDto(category);
+        String expected = responseDto.getName();
 
-        Category category = new Category();
         when(categoryRepository.findById(CATEGORY_ID)).thenReturn(Optional.of(category));
         when(categoryMapper.toDto(category)).thenReturn(responseDto);
 
         CategoryResponseDto result = categoryService.findById(CATEGORY_ID);
+        String actual = result.getName();
 
-        assertEquals(responseDto.getName(), result.getName());
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -79,11 +75,44 @@ class CategoryServiceImplTest {
     void findAll_GetAllCategories_ReturnAllCategories() {
         List<Category> categories = List.of(new Category(), new Category(), new Category());
         Page<Category> categoryPage = new PageImpl<>(categories);
+
         when(categoryRepository.findAll(any(Pageable.class))).thenReturn(categoryPage);
         when(categoryMapper.toDto(any())).thenReturn(new CategoryResponseDto());
 
         List<CategoryResponseDto> result = categoryService.findAll(Pageable.unpaged());
+        int actual = result.size();
 
-        assertEquals(EXPECTED_CATEGORIES, result.size());
+        assertEquals(EXPECTED_CATEGORIES, actual);
+    }
+
+    private CategoryRequestDto createCategoryRequestDto() {
+        CategoryRequestDto requestDto = new CategoryRequestDto();
+        requestDto.setName(CATEGORY_NAME);
+        requestDto.setDescription(CATEGORY_DESCRIPTION);
+        return requestDto;
+    }
+
+    private Category createCategory() {
+        Category category = new Category();
+        category.setId(CATEGORY_ID);
+        category.setName(CATEGORY_NAME);
+        category.setDescription(CATEGORY_DESCRIPTION);
+        return category;
+    }
+
+    private CategoryResponseDto createCategoryResponseDto(CategoryRequestDto requestDto) {
+        CategoryResponseDto responseDto = new CategoryResponseDto();
+        responseDto.setId(CATEGORY_ID);
+        responseDto.setName(requestDto.getName());
+        responseDto.setDescription(requestDto.getDescription());
+        return responseDto;
+    }
+
+    private CategoryResponseDto createCategoryResponseDto(Category category) {
+        CategoryResponseDto responseDto = new CategoryResponseDto();
+        responseDto.setId(category.getId());
+        responseDto.setName(category.getName());
+        responseDto.setDescription(category.getDescription());
+        return responseDto;
     }
 }

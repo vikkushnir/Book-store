@@ -5,6 +5,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -25,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BookControllerTest {
     private static final Long BOOK_ID = 1L;
-    private static final String BOOK_TITLE = "some title";
+    private static final String BOOK_TITLE = "The Hitchhiker's Guide to the Galaxy";
     private static final String BOOK_URL = "/books";
     private static final String BOOK_BY_ID_URL = "/books/1";
 
@@ -64,7 +67,10 @@ class BookControllerTest {
         when(bookService.getById(BOOK_ID)).thenReturn(bookDto);
 
         mockMvc.perform(get(BOOK_BY_ID_URL))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(BOOK_ID))
+                .andExpect(jsonPath("$.title").value(BOOK_TITLE));
     }
 
     @Test
