@@ -35,6 +35,7 @@ public class CategoryController {
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create a category",
             description = "Create a new category")
+    @ResponseStatus(HttpStatus.CREATED)
     public CategoryResponseDto createCategory(
             @RequestBody @Valid CategoryRequestDto requestDto) {
         return categoryService.save(requestDto);
@@ -50,8 +51,10 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
+
     @Operation(summary = "Get category by ID",
             description = "Get a category by ID")
+    @ResponseStatus(value = HttpStatus.OK)
     public CategoryResponseDto getCategoryById(@PathVariable Long id) {
         return categoryService.findById(id);
     }
