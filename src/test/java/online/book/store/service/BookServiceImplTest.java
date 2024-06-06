@@ -1,6 +1,7 @@
 package online.book.store.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -13,7 +14,6 @@ import online.book.store.mapper.BookMapper;
 import online.book.store.model.Book;
 import online.book.store.repository.book.BookRepository;
 import online.book.store.service.book.BookServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -65,6 +65,7 @@ public class BookServiceImplTest {
         List<BookResponseDto> actual = bookService.getAll(pageable);
 
         assertEquals(bookList.size(), actual.size());
+        assertEquals(bookDto, actual.getFirst());
     }
 
     @Test
@@ -87,9 +88,13 @@ public class BookServiceImplTest {
     @DisplayName("Get book by invalid id")
     public void getBookById_InvalidBookId_NotOk() {
         when(bookRepository.findById(INVALID_ID)).thenReturn(Optional.empty());
+        String expected = "Can't find book by id: " + INVALID_ID;
 
-        Assertions.assertThrows(EntityNotFoundException.class,
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
                 () -> bookService.getById(INVALID_ID));
+        String actual = exception.getMessage();
+
+        assertEquals(expected, actual);
     }
 
     private Book defaultBook() {
