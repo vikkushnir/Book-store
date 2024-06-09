@@ -1,5 +1,8 @@
-#  📚 Online Book Store 📚
-![Online-Book-Store-Logo.png](images/online-book-store-logo.png)
+<div align="center">
+  <h1>//////📚 Online Book Store 📚\\\\\\</h1>
+</div> 
+
+![Online-Book-Store-Logo.png](images/book-logo.png)
 ---
 💁Welcome to the online bookstore management system!
 
@@ -12,7 +15,7 @@ Each user can create a personal account, track purchase history.
 Adding books to the cart and completing orders is done easily and efficiently, 
 providing customers with a convenient and secure way to purchase their selected literature.
 
-[Here]() is a short video presentation of application.
+[Here](https://www.postman.com/navigation-geoscientist-40209657/workspace/book-store-api2/collection/34526088-f17d3e7a-f1c3-41ec-b274-bb0caa754887?action=share&creator=34526088) is a short video presentation of application.
 
 ---
 <p align="center">
@@ -69,7 +72,16 @@ providing customers with a convenient and secure way to purchase their selected 
 4. Build the project:
     - Open your terminal and paste: `mvn clean package`
 5. Use Docker Compose:
-    - Open your terminal and paste: `docker compose build` and `docker compose up`
+    - Open your terminal and paste: `docker-compose build` and `docker-compose up`
+
+---
+Here is the Postman collection to test the program:
+
+[![Run In Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/navigation-geoscientist-40209657/workspace/book-store-api2/collection/34526088-f17d3e7a-f1c3-41ec-b274-bb0caa754887?action=share&creator=34526088)
+
+You can access the Swagger UI for detailed API documentation and interactive testing at:
+
+[![Swagger UI](https://img.shields.io/badge/Swagger-UI-green)](http://ec2-54-221-101-88.compute-1.amazonaws.com/api/swagger-ui/index.html#/)
 
 ---
 <h2 id="domain-models"> 📋 Domain Models</h2>
@@ -137,3 +149,23 @@ providing customers with a convenient and secure way to purchase their selected 
 | GET             | /api/orders/{id}/items/{itemId} | USER     | Get info about order item by order id and item id                         |
 | PATCH           | /api/orders/{id}                | ADMIN    | Update order status for order by id                                       |
 ___
+
+<h2 id="challenges"> 💡 Challenges</h2>
+During the development of the online bookstore management system, several challenges were encountered:
+
+**Database Schema Evolution:** Managing changes to the database schema without disrupting the live application was challenging. I used Liquibase to handle versioning and applying incremental changes to the database.
+
+**Security:** Ensuring secure authentication and authorization was critical. Implementing JWT for secure login sessions and role-based access control required meticulous planning and testing.
+
+**Data Mapping:** Converting data between different layers (database entities, DTOs) was complex. MapStruct helped automate and simplify the mapping process, reducing boilerplate code and potential errors.
+
+---
+
+<h2 id="improvements"> 🚀 Possible Improvements</h2>
+There are several potential improvements to enhance the online bookstore management system:
+
+**Search Optimization:** Enhancing the search functionality with advanced filters, natural language processing, and auto-suggestions.
+
+**Payment Integration:** Integrating more payment gateways to provide users with multiple payment options.
+
+**User Profile Management:** Enhancing user profile management with more customization options, such as notification preferences, profile customization, account security settings.
