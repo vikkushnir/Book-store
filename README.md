@@ -14,8 +14,8 @@ The service offers a convenient search for books by categories to provide quick 
 Each user can create a personal account, track purchase history. 
 Adding books to the cart and completing orders is done easily and efficiently, 
 providing customers with a convenient and secure way to purchase their selected literature.
-
-[Here](https://www.postman.com/navigation-geoscientist-40209657/workspace/book-store-api2/collection/34526088-f17d3e7a-f1c3-41ec-b274-bb0caa754887?action=share&creator=34526088) is a short video presentation of application.
+### 📷 Visual Overview
+[![Watch on Loom](https://img.shields.io/badge/Watch%20on-Loom-00a4d9)](https://www.loom.com/share/79258adc8cca46069736d902d73330e3?sid=77bcb216-ed29-4741-b3cc-3eaa582cdf0d)
 
 ---
 <p align="center">
