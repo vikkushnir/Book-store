@@ -10,7 +10,9 @@ import online.book.store.dto.response.book.BookDtoWithoutCategoryIds;
 import online.book.store.dto.response.category.CategoryResponseDto;
 import online.book.store.service.book.BookService;
 import online.book.store.service.category.CategoryService;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,7 +47,7 @@ public class CategoryController {
     @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Get all categories",
             description = "Get a list of all available categories")
-    public List<CategoryResponseDto> getAll(Pageable pageable) {
+    public List<CategoryResponseDto> getAll(@ParameterObject @PageableDefault Pageable pageable) {
         return categoryService.findAll(pageable);
     }
 
@@ -81,8 +83,10 @@ public class CategoryController {
     @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Get books by category ID",
             description = "Get books by category ID")
-    public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(@PathVariable Long id,
-                                                                Pageable pageable) {
+    public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(
+            @PathVariable Long id,
+            @ParameterObject @PageableDefault Pageable pageable
+    ) {
         return bookService.getBooksByCategoryId(id, pageable);
     }
 }
