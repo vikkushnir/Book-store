@@ -169,3 +169,16 @@ There are several potential improvements to enhance the online bookstore managem
 **Payment Integration:** Integrating more payment gateways to provide users with multiple payment options.
 
 **User Profile Management:** Enhancing user profile management with more customization options, such as notification preferences, profile customization, account security settings.
+
+---
+## 👨‍💻Author
+
+* Github: [@vikkushnir](https://github.com/vikkushnir)
+* LinkedIn: [Viktor Kushnir](https://www.linkedin.com/in/viktor-kushnir-716b1a18b/)
+* Telegram: [@Viktor_K2](https://t.me/viktor_k2)
+
+---
+
+##  📝License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
