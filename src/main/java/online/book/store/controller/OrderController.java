@@ -12,7 +12,9 @@ import online.book.store.dto.response.order.OrderResponseDto;
 import online.book.store.model.User;
 import online.book.store.service.order.OrderItemService;
 import online.book.store.service.order.OrderService;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -38,7 +40,7 @@ public class OrderController {
     @Operation(summary = "Get orders history", description = "Get a list of all orders")
     public List<OrderResponseDto> getOrdersHistory(
             Authentication authentication,
-            Pageable pageable
+            @ParameterObject @PageableDefault Pageable pageable
     ) {
         User user = (User) authentication.getPrincipal();
         return orderService.getOrdersHistory(user.getId(), pageable);
@@ -72,7 +74,7 @@ public class OrderController {
     @Operation(summary = "Get all item from a certain order",
             description = "Get all item from a certain order")
     public List<OrderItemResponseDto> getAllOrderItemsForSpecificOrder(
-            Pageable pageable,
+            @ParameterObject @PageableDefault Pageable pageable,
             @PathVariable Long orderId
     ) {
         return orderItemService.getAllOrderItemsForSpecificOrder(pageable, orderId);
