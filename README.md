@@ -83,6 +83,14 @@ You can access the Swagger UI for detailed API documentation and interactive tes
 
 [![Swagger UI](https://img.shields.io/badge/Swagger-UI-green)](http://ec2-54-221-101-88.compute-1.amazonaws.com/api/swagger-ui/index.html#/)
 
+#### Credentials
+
+| **Role** | **Login**                | **Password**       |
+|:---------|:-------------------------|:-------------------|
+| ADMIN    | sara.smith@example.com   | StrongPassword123  |
+| USER     | emily.smith@example.com  | StrongPassword123  |
+
+
 ---
 <h2 id="domain-models"> 📋 Domain Models</h2>
 
