@@ -9,7 +9,9 @@ import online.book.store.dto.request.book.BookRequestDto;
 import online.book.store.dto.request.book.BookSearchParametersDto;
 import online.book.store.dto.response.book.BookResponseDto;
 import online.book.store.service.book.BookService;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +35,7 @@ public class BookController {
     @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Get all books",
             description = "Get a list of all available books")
-    public List<BookResponseDto> findAll(Pageable pageable) {
+    public List<BookResponseDto> findAll(@ParameterObject @PageableDefault Pageable pageable) {
         return bookService.getAll(pageable);
     }
 
@@ -78,8 +80,9 @@ public class BookController {
     @Operation(summary = "Get a list of books by search parameters",
             description = "You can use: title, author, isbn, priceFrom, priceTo "
                     + "as search parameters")
-    public List<BookResponseDto> search(@Valid BookSearchParametersDto searchParametersDto,
-                                        Pageable pageable) {
+    public List<BookResponseDto> search(
+            @Valid BookSearchParametersDto searchParametersDto,
+            @ParameterObject @PageableDefault Pageable pageable) {
         return bookService.search(searchParametersDto, pageable);
     }
 }
