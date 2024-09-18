@@ -1,8 +1,8 @@
 package online.book.store.service.user;
 
 import online.book.store.dto.request.user.UserRegistrationRequestDto;
-import online.book.store.dto.response.user.UserResponseDto;
+import online.book.store.dto.response.user.UserRegistrationResponseDto;
 
 public interface RegistrationService {
-    UserResponseDto register(UserRegistrationRequestDto requestDto);
+    UserRegistrationResponseDto register(UserRegistrationRequestDto requestDto);
 }

@@ -2,15 +2,15 @@ package online.book.store.dto.request.user;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import online.book.store.validation.FieldMatch;
 
-@Getter
-@Setter
+@Data
 @FieldMatch(field = "password",
         fieldMatch = "repeatPassword",
         message = "The password fields must match")
+@Accessors(chain = true)
 public class UserRegistrationRequestDto {
     @NotBlank
     private String email;

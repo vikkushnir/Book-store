@@ -1,11 +1,12 @@
 package online.book.store.config;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import lombok.RequiredArgsConstructor;
 import online.book.store.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,7 +43,7 @@ public class SecurityConfig {
                                 .anyRequest()
                                 .authenticated()
                 )
-                .httpBasic(Customizer.withDefaults())
+                .httpBasic(withDefaults())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(

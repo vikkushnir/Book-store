@@ -53,7 +53,6 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
-
     @Operation(summary = "Get category by ID",
             description = "Get a category by ID")
     @ResponseStatus(value = HttpStatus.OK)
