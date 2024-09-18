@@ -77,7 +77,7 @@ providing customers with a convenient and secure way to purchase their selected 
 ---
 Here is the Postman collection to test the program:
 
-[![Run In Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/navigation-geoscientist-40209657/book-store-api/collection/paafu5d/?action=share&creator=34526088)
+[![Run In Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/navigation-geoscientist-40209657/workspace/book-store-api2/collection/34526088-f17d3e7a-f1c3-41ec-b274-bb0caa754887?action=share&creator=34526088)
 
 You can access the Swagger UI for detailed API documentation and interactive testing at:
 
