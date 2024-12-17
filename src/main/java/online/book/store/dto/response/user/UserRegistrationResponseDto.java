@@ -1,9 +1,11 @@
 package online.book.store.dto.response.user;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
-public class UserResponseDto {
+@Accessors(chain = true)
+public class UserRegistrationResponseDto {
     private Long id;
     private String email;
     private String firstName;

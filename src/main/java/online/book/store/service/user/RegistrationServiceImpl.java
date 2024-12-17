@@ -3,7 +3,7 @@ package online.book.store.service.user;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import online.book.store.dto.request.user.UserRegistrationRequestDto;
-import online.book.store.dto.response.user.UserResponseDto;
+import online.book.store.dto.response.user.UserRegistrationResponseDto;
 import online.book.store.exception.RegistrationException;
 import online.book.store.mapper.UserMapper;
 import online.book.store.model.Role.RoleName;
@@ -24,7 +24,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final ShoppingCartService shoppingCartService;
 
     @Override
-    public UserResponseDto register(UserRegistrationRequestDto requestDto) {
+    public UserRegistrationResponseDto register(UserRegistrationRequestDto requestDto) {
         if (userRepository.findByEmail(requestDto.getEmail()).isPresent()) {
             throw new RegistrationException("Can't register user with this email: "
                     + requestDto.getEmail() + " is already exists");

@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import online.book.store.dto.request.user.UserLoginRequestDto;
 import online.book.store.dto.request.user.UserRegistrationRequestDto;
 import online.book.store.dto.response.user.UserLoginResponseDto;
-import online.book.store.dto.response.user.UserResponseDto;
+import online.book.store.dto.response.user.UserRegistrationResponseDto;
 import online.book.store.exception.RegistrationException;
 import online.book.store.service.user.AuthenticationService;
 import online.book.store.service.user.RegistrationService;
@@ -27,7 +27,7 @@ public class AuthenticationController {
     @PostMapping("/registration")
     @Operation(summary = "Register a new user",
             description = "Register a new user")
-    public UserResponseDto register(
+    public UserRegistrationResponseDto register(
             @RequestBody @Valid UserRegistrationRequestDto requestDto
     ) throws RegistrationException {
         return userService.register(requestDto);
