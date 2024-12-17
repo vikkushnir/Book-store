@@ -29,9 +29,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ExtendWith(MockitoExtension.class)
 class RegistrationServiceImplTest {
-    public static final String EMAIL = "user@example.com";
-    public static final String PASSWORD = "password";
-    public static final String ENCODED_PASSWORD = "encodedPassword";
+    private static final String EMAIL = "user@example.com";
+    private static final String PASSWORD = "password";
+    private static final String ENCODED_PASSWORD = "encodedPassword";
 
     @Mock
     private UserRepository userRepository;

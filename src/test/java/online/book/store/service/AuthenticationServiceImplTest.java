@@ -25,10 +25,10 @@ import org.springframework.security.core.AuthenticationException;
 
 @ExtendWith(MockitoExtension.class)
 class AuthenticationServiceImplTest {
-    public static final String EMAIL = "user@example.com";
-    public static final String PASSWORD = "password";
-    public static final String EXPECTED_TOKEN = "mockedToken";
-    public static final String BAD_CREDENTIALS = "Bad credentials";
+    private static final String EMAIL = "user@example.com";
+    private static final String PASSWORD = "password";
+    private static final String EXPECTED_TOKEN = "mockedToken";
+    private static final String BAD_CREDENTIALS = "Bad credentials";
     @Mock
     private JwtUtil jwtUtil;
 

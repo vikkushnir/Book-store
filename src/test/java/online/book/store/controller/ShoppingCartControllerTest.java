@@ -30,7 +30,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -46,7 +45,7 @@ class ShoppingCartControllerTest {
     private static final int UPDATED_QUANTITY = 2;
     private static final String BOOK_TITLE = "The Hitchhiker's Guide to the Galaxy";
     private static final String CART_URL = "/cart";
-    private static final String CART_ITEMS_URL = "/cart/cart-items/1";
+    private static final String CART_ITEMS_1 = "/cart/cart-items/1";
 
     private static MockMvc mockMvc;
 
@@ -81,7 +80,6 @@ class ShoppingCartControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
     @DisplayName("Add item to shopping cart")
     @Sql(scripts = "classpath:database/update-create-shopping-cart.sql",
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -109,7 +107,6 @@ class ShoppingCartControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "user", roles = "USER")
     @DisplayName("Get shopping cart")
     @Sql(scripts = "classpath:database/update-create-shopping-cart.sql",
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -130,7 +127,6 @@ class ShoppingCartControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
     @DisplayName("Update item in shopping cart")
     @Sql(scripts = "classpath:database/update-create-shopping-cart.sql",
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -149,7 +145,7 @@ class ShoppingCartControllerTest {
 
         String jsonRequest = objectMapper.writeValueAsString(requestDto);
 
-        mockMvc.perform(put(CART_ITEMS_URL)
+        mockMvc.perform(put(CART_ITEMS_1)
                 .content(jsonRequest)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -157,14 +153,13 @@ class ShoppingCartControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
     @DisplayName("Delete item from shopping cart")
     @Sql(scripts = "classpath:database/update-create-shopping-cart.sql",
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     void deleteItemFromCart_DeleteItem_Success() throws Exception {
         setUpSecurityContext();
 
-        mockMvc.perform(delete(CART_ITEMS_URL))
+        mockMvc.perform(delete(CART_ITEMS_1))
                 .andExpect(status().isNoContent());
     }
 }

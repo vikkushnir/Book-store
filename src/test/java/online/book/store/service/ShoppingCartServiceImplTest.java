@@ -77,8 +77,9 @@ public class ShoppingCartServiceImplTest {
     public void getShoppingCart_InvalidUserId_ThrowsException() {
         when(shoppingCartRepository.findByUserId(USER_ID)).thenReturn(Optional.empty());
 
-        assertThrows(EntityNotFoundException.class,
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
                 () -> shoppingCartService.getShoppingCart(USER_ID));
+        assertEquals("Shopping Cart not found", exception.getMessage());
     }
 
     @Test
