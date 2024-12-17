@@ -1,4 +1,5 @@
 -- Clear existing data to avoid primary key conflicts
+DELETE FROM books_categories WHERE book_id = 1;
 DELETE FROM cart_items WHERE shopping_cart_id = 1;
 DELETE FROM shopping_carts WHERE id = 1;
 DELETE FROM books WHERE id = 1;
