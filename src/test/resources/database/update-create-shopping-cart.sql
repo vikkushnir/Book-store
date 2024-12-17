@@ -6,7 +6,7 @@ DELETE FROM books WHERE id = 1;
 
 -- Reinsert data
 INSERT INTO books (id, title, author, isbn, price)
-VALUES (1, 'Test Book', 'Test Author', '123456789', 10);
+VALUES (1, 'The Hitchhiker''s Guide to the Galaxy', 'Douglas Adams', '9780345391803', 8.99);
 
 INSERT INTO shopping_carts (id, user_id, is_deleted) VALUES (1, 1, false);
 
